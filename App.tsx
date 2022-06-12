@@ -8,7 +8,7 @@
  * @format
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -17,15 +17,18 @@ import {
   View,
 } from 'react-native';
 import Home from './src/screens/home';
+import Splash from './src/screens/splash';
 
 
-const App = () => {return(
+const App = () => {
+
+  return (
 
 
-  <SafeAreaView style={{flex:1}}>
-    <Home/>
-  </SafeAreaView>
-    )
+    <SafeAreaView style={{ flex: 1 }}>
+      <Home />
+    </SafeAreaView>
+  )
 }
 
 

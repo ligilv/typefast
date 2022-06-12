@@ -1,38 +1,28 @@
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
-
+import randomWord from './randomword'
 type Props = {}
 
 const Home = (props: Props) => {
-    const [word, setWord] = useState("")
+    const [word, setWord] = useState(randomWord)
     const [wordInput, setWordInput] = useState("")
     const [isEditable, setIsEditable] = useState(true)
-    const [bgColor, setBGcolor] = useState("grey")
-    function makeid() {
-        var result = '';
-        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        var charactersLength = 6;
-        for (var i = 0; i < 6; i++) {
-            result += characters.charAt(Math.floor(Math.random() *
-                52));
-        }
-        setWord(result)
+    const [bgColor, setBGcolor] = useState("white")
+    const [seconds, setSeconds] = useState(0)
+    const randomword = randomWord()
+    // useEffect(() => {
+    //     const intervals = setInterval(() => {
+    //         setSeconds((prev) => prev + 100)
+    //         // console.log(seconds);
 
-    }
-    useEffect(() => {
-        makeid()
-    }, [])
-    var d = new Date().getMilliseconds()
-    useEffect(() => {
-        setTimeout(() => {
-            console.log(d);
+    //     }, 100)
+    //     return () => clearInterval(intervals)
+    // }, [seconds])
 
-        }, 0)
-    })
     const oninputchange = (item: any) => {
         setWordInput(item)
         if (item == "") {
-            setBGcolor('grey')
+            setBGcolor('white')
         }
         for (let i = 0; i < item.length; i++) {
             if (item == word.slice(0, i + 1)) {
@@ -50,17 +40,29 @@ const Home = (props: Props) => {
         }
 
     }
-    const resetGame = () => {
-        setWordInput('')
-        setBGcolor('grey')
+    const resetGame = (type: String) => {
+        if (type == "reset") {
+            setWordInput('')
+
+        }
+        else if (type == "next") {
+            setWord(randomWord)
+
+        }
+        setBGcolor('white')
         setIsEditable(true)
     }
+
     return (
         <View>
-            <Text>Home</Text>
-            <Text>{word}</Text>
-            <TextInput editable={isEditable} style={{ backgroundColor: bgColor }} value={wordInput} onChangeText={oninputchange} />
-            <Button title="reset" onPress={resetGame} />
+            {/* <Text>{seconds}</Text> */}
+            <Text style={{ textAlign: 'center', fontSize: 22, fontWeight: '800' }}>Just type fast</Text>
+            <Text style={{ textAlign: 'center', fontSize: 22, fontWeight: '800', marginTop: 30 }}>{word}</Text>
+            <View style={{ alignItems: 'center', height: 50, justifyContent: 'center' }}>
+                <TextInput editable={isEditable} style={{ backgroundColor: bgColor, width: 200, height: 40, borderWidth: 1, borderRadius: 10 }} value={wordInput} onChangeText={oninputchange} />
+            </View>
+            <Button title="reset" onPress={() => resetGame('reset')} />
+            <Button title="next" onPress={() => resetGame('next')} />
         </View>
     )
 }
