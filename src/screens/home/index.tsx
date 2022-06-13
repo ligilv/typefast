@@ -10,14 +10,14 @@ const Home = (props: Props) => {
     const [bgColor, setBGcolor] = useState("white")
     const [seconds, setSeconds] = useState(0)
     const randomword = randomWord()
-    // useEffect(() => {
-    //     const intervals = setInterval(() => {
-    //         setSeconds((prev) => prev + 100)
-    //         // console.log(seconds);
+    useEffect(() => {
+        const intervals = setInterval(() => {
+            setSeconds((prev) => prev + 100)
+            // console.log(seconds);
 
-    //     }, 100)
-    //     return () => clearInterval(intervals)
-    // }, [seconds])
+        }, 100)
+        return () => clearInterval(intervals)
+    }, [seconds])
 
     const oninputchange = (item: any) => {
         setWordInput(item)
@@ -55,7 +55,7 @@ const Home = (props: Props) => {
 
     return (
         <View>
-            {/* <Text>{seconds}</Text> */}
+            <Text>{seconds}</Text>
             <Text style={{ textAlign: 'center', fontSize: 22, fontWeight: '800' }}>Just type fast</Text>
             <Text style={{ textAlign: 'center', fontSize: 22, fontWeight: '800', marginTop: 30 }}>{word}</Text>
             <View style={{ alignItems: 'center', height: 50, justifyContent: 'center' }}>
