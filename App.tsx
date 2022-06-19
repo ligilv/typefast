@@ -25,7 +25,7 @@ const App = () => {
   return (
 
 
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#C499BA' }}>
       <Home />
     </SafeAreaView>
   )
